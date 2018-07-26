@@ -1,0 +1,399 @@
+<div class="page-sidebar" id="sidebar">
+    <!-- Page Sidebar Header-->
+    <div class="sidebar-header-wrapper">
+        <input class="searchinput" type="text">
+        <i class="searchicon fa fa-search"></i>
+        <div class="searchhelper">Search Reports, Charts, Emails or Notifications</div>
+    </div>
+    <!-- /Page Sidebar Header -->
+    <!-- Sidebar Menu -->
+    <ul class="nav sidebar-menu">
+        <!--Dashboard-->
+
+        <li {if condition="$con eq 'Goods'"}class="open"{/if}>
+            <a href="#" class="menu-dropdown">
+                <i class="menu-icon fa fa-shopping-cart"></i>
+                <span class="menu-text">商品管理</span>
+                <i class="menu-expand"></i>
+            </a>
+            <ul class="submenu">
+                <li <?php if($action = 'goodsList'){echo 'class="active"';} ?>>
+                    <a href="{:url('Goods/goodsList')}">
+                        <span class="menu-text">商品列表</span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+                <li <?php if($action = 'goodsAdd'){echo 'class="active"';} ?>>
+                    <a href="{:url('Goods/goodsAdd')}">
+                        <span class="menu-text">添加商品</span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="{:url('Brand/brandList')}">
+                        <span class="menu-text">商品品牌</span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="{:url('Goodsclass/GoodsList')}">
+                        <span class="menu-text">商品分类</span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="{:url('Goodstype/typeList')}">
+                        <span class="menu-text">商品类型</span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="{:url('Goodsattr/attrList')}">
+                        <span class="menu-text">商品属性</span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="{:url('Conf/lst')}">
+                        <span class="menu-text">商品回收站</span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li {if condition="$con eq 'Recom'"}class="open"{/if}>
+            <a href="#" class="menu-dropdown">
+                <i class="menu-icon fa fa-power-off"></i>
+                <span class="menu-text">推荐位管理</span>
+                <i class="menu-expand"></i>
+            </a>
+            <ul class="submenu">
+                <li>
+                    <a href="{:url('Recom/recomList')}">
+                                    <span class="menu-text">
+                                        推荐位列表
+                                    </span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+        <li {if condition="$con eq 'Classwords'"}class="open"{/if}>
+            <a href="#" class="menu-dropdown">
+                <i class="menu-icon fa fa-random"></i>
+                <span class="menu-text">分类关联</span>
+                <i class="menu-expand"></i>
+            </a>
+            <ul class="submenu">
+                <li>
+                    <a href="{:url('Classwords/wordsList')}">
+                                    <span class="menu-text">
+                                        关键词列表
+                                    </span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+        <li {if condition="$con eq 'Brandspread'"}class="open"{/if}>
+            <a href="#" class="menu-dropdown">
+                <i class="menu-icon fa fa-hand-o-right"></i>
+                <span class="menu-text">推荐广告</span>
+                <i class="menu-expand"></i>
+            </a>
+            <ul class="submenu">
+                <li>
+                    <a href="{:url('Brandspread/bsList')}">
+                                    <span class="menu-text">
+                                        广告列表
+                                    </span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="{:url('CategoryAd/adList')}">
+                     <span class="menu-text"> 左图关联</span>
+                    <i class="menu-expand"></i>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+        <li>
+            <a href="#" class="menu-dropdown">
+                <i class="menu-icon fa  fa-bookmark"></i>
+                <span class="menu-text">促销管理</span>
+                <i class="menu-expand"></i>
+            </a>
+            <ul class="submenu">
+                <li>
+                    <a href="/admin/document/index.html">
+                                    <span class="menu-text">
+                                        团购活动
+                                    </span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/document/index.html">
+                                    <span class="menu-text">
+                                        积分商城
+                                    </span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/document/index.html">
+                                    <span class="menu-text">
+                                       优惠券
+                                    </span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#" class="menu-dropdown">
+                <i class="menu-icon fa fa-file-text"></i>
+                <span class="menu-text">订单管理</span>
+                <i class="menu-expand"></i>
+            </a>
+            <ul class="submenu">
+                <li>
+                    <a href="/admin/document/index.html">
+                                    <span class="menu-text">
+                                        订单列表
+                                    </span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/document/index.html">
+                                    <span class="menu-text">
+                                        订单查询
+                                    </span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li {if condition="$con eq 'Memberlevel'"}class="open"{/if}>
+            <a href="#" class="menu-dropdown">
+                <i class="menu-icon fa fa-user"></i>
+                <span class="menu-text">会员管理</span>
+                <i class="menu-expand"></i>
+            </a>
+            <ul class="submenu">
+                <li>
+                    <a href="/admin/document/index.html">
+                                    <span class="menu-text">
+                                        会员列表
+                                    </span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="{:url('Memberlevel/levelList')}">
+                                    <span class="menu-text">
+                                       会员等级
+                                    </span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/document/index.html">
+                                    <span class="menu-text">
+                                        会员留言
+                                    </span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#" class="menu-dropdown">
+                <i class="menu-icon fa fa-power-off"></i>
+                <span class="menu-text">权限管理</span>
+                <i class="menu-expand"></i>
+            </a>
+            <ul class="submenu">
+                <li>
+                    <a href="/admin/document/index.html">
+                                    <span class="menu-text">
+                                        权限列表
+                                    </span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+        <li>
+            <a href="#" class="menu-dropdown">
+                <i class="menu-icon fa fa-gear"></i>
+                <span class="menu-text">系统设置</span>
+                <i class="menu-expand"></i>
+            </a>
+            <ul class="submenu">
+                <li>
+                    <a href="{:url('Conf/confList')}">
+                                    <span class="menu-text">
+                                        配置项
+                                    </span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="{:url('Conf/confLst')}">
+                                    <span class="menu-text">
+                                       配置管理
+                                    </span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/document/index.html">
+                                    <span class="menu-text">
+                                        支付方式设置
+                                    </span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li {if condition="$con eq 'Nav'"}class="open"{/if}>
+            <a href="#" class="menu-dropdown">
+                <i class="menu-icon fa fa-location-arrow"></i>
+                <span class="menu-text">导航</span>
+                <i class="menu-expand"></i>
+            </a>
+            <ul class="submenu">
+                <li>
+                    <a href="{:url('Nav/navList')}">
+                                    <span class="menu-text">
+                                        导航列表
+                                    </span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#" class="menu-dropdown">
+                <i class="menu-icon fa fa-ban"></i>
+                <span class="menu-text">数据库管理</span>
+                <i class="menu-expand"></i>
+            </a>
+            <ul class="submenu">
+                <li>
+                    <a href="/admin/document/index.html">
+                                    <span class="menu-text">
+                                        数据库备份
+                                    </span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/document/index.html">
+                                    <span class="menu-text">
+                                       数据表优化
+                                    </span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#" class="menu-dropdown">
+                <i class="menu-icon fa  fa-envelope-o"></i>
+                <span class="menu-text">短信管理</span>
+                <i class="menu-expand"></i>
+            </a>
+            <ul class="submenu">
+                <li>
+                    <a href="/admin/document/index.html">
+                                    <span class="menu-text">
+                                        发送短信
+                                    </span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/document/index.html">
+                                    <span class="menu-text">
+                                       短信签名
+                                    </span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li {if condition="$con eq 'Cate'"}class="open"{/if}>
+            <a href="#" class="menu-dropdown">
+                <i class="menu-icon fa  fa-file-text"></i>
+                <span class="menu-text">文章模块</span>
+                <i class="menu-expand"></i>
+            </a>
+            <ul class="submenu">
+                <li>
+                    <a href="{:url('Cate/cateList')}">
+                                    <span class="menu-text">
+                                        文章分类
+                                    </span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="{:url('Article/articleList')}">
+                                    <span class="menu-text">
+                                       文章管理
+                                    </span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li {if condition="$con eq 'Picture'"}class="open"{/if}>
+            <a href="#" class="menu-dropdown">
+                <i class="menu-icon fa  fa-picture-o"></i>
+                <span class="menu-text">图片管理</span>
+                <i class="menu-expand"></i>
+            </a>
+            <ul class="submenu">
+                <li>
+                    <a href="{:url('Picture/pictureList')}">
+                        <span class="menu-text">图片列表</span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="{:url('Broadcast/broadList')}">
+                        <span class="menu-text">轮播图列表</span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li {if condition="$con eq 'Link'"}class="open"{/if}>
+            <a href="#" class="menu-dropdown">
+                <i class="menu-icon fa  fa-link"></i>
+                <span class="menu-text">友情链接</span>
+                <i class="menu-expand"></i>
+            </a>
+            <ul class="submenu">
+                <li>
+                    <a href="{:url('Link/linkList')}">
+                                    <span class="menu-text">
+                                        链接列表
+                                    </span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+    </ul>
+    <!-- /Sidebar Menu -->
+</div>

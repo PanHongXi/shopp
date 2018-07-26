@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="utf-8">
+    <title>潘琰SHOPP</title>
+
+    <meta name="description" content="Dashboard">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--Basic Styles-->
+    <link href="__ADMIN__/style/bootstrap.css" rel="stylesheet">
+    <link href="__ADMIN__/style/font-awesome.css" rel="stylesheet">
+    <link href="__ADMIN__/style/weather-icons.css" rel="stylesheet">
+
+    <!--Beyond styles-->
+    <link id="beyond-link" href="__ADMIN__/style/beyond.css" rel="stylesheet" type="text/css">
+    <link href="__ADMIN__/style/demo.css" rel="stylesheet">
+    <link href="__ADMIN__/style/typicons.css" rel="stylesheet">
+    <link href="__ADMIN__/style/animate.css" rel="stylesheet">
+
+</head>
+<body>
+<!-- 头部 -->
+{include file="Common/header"}
+
+<!-- /头部 -->
+
+<div class="main-container container-fluid">
+    <div class="page-container">
+        <!-- Page Sidebar -->
+        {include file="Common/left"}
+        <!-- /Page Sidebar -->
+        <!-- Page Content -->
+        <div class="page-content">
+            <!-- Page Breadcrumb -->
+            <div class="page-breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="#">系统</a>
+                    </li>
+                    <li>
+                        <a href="">配置管理</a>
+                    </li>
+                    <li class="active">配置项</li>
+                </ul>
+            </div>
+            <!-- /Page Breadcrumb -->
+
+            <!-- Page Body -->
+            <div class="page-body">
+
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12 col-xs-12">
+                        <div class="widget">
+                            <div class="widget-header bordered-bottom bordered-blue">
+                                <span class="widget-caption">配置项</span>
+                            </div>
+                            <div class="widget-body">
+                                <div id="horizontal-form">
+
+                                        <div class="widget-body">
+                                            <div class="widget-main ">
+                                                <div class="tabbable">
+                                                    <ul class="nav nav-tabs tabs-flat" id="myTab11">
+                                                        <li class="active">
+                                                            <a data-toggle="tab" href="#home11">
+                                                                店铺配置
+                                                            </a>
+                                                        </li>
+                                                        <li class="">
+                                                            <a data-toggle="tab" href="#profile11">
+                                                                商品配置
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="tab-content tabs-flat">
+                                                        <div id="home11" class="tab-pane active">
+                                                            <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+                                                                <?php foreach( $ShoppConfRes as $k =>$shoppConf ) :?>
+                                                                    <div class="form-group">
+                                                                        <label for="username" class="col-sm-2 control-label no-padding-right"><?php echo $shoppConf['conf_cname'] ?></label>
+
+                                                                        <div class="col-sm-6">
+                                                                            <?php if($shoppConf['form_stype'] == 'input') :?>
+                                                                            <!--单行文本-->
+                                                                                <input value="{$shoppConf['value']}" class="form-control"  placeholder="" name="<?php echo $shoppConf['conf_ename'] ;?>"  type="text">
+                                                                            <?php elseif($shoppConf['form_stype'] == 'textarea') : ?>
+                                                                            <!--文本域-->
+                                                                                <textarea name="<?php echo $shoppConf['conf_ename'] ;?>" style="width: 600px;height: 80px;margin-left: 15px">{$shoppConf['value']}</textarea>
+                                                                            <?php elseif($shoppConf['form_stype'] == 'redio') : ?>
+                                                                            <!--单选-->
+                                                                                <div class="col-sm-6">
+                                                                                    <?php if($shoppConf['values']):
+                                                                                          $arr = explode(',',$shoppConf['values']);
+                                                                                          foreach($arr as $k1 => $v1):
+                                                                                    ?>
+                                                                                    <div class="radio" style="float: left;">
+                                                                                        <label>
+                                                                                            &nbsp;&nbsp;&nbsp;<input <?php if($shoppConf['value'] == $v1){echo 'checked="checked"';} ?> value="<?php echo $v1; ?>" name="<?php echo $shoppConf['conf_ename'] ;?>" type="radio">
+                                                                                            <span class="text"><?php echo $v1; ?> </span>
+                                                                                        </label>
+                                                                                    </div>
+                                                                                    <?php endforeach; endif;?>
+
+                                                                                </div>
+                                                                            <?php elseif($shoppConf['form_stype'] == 'checkbox') : ?>
+                                                                            <!--复选-->
+                                                                                <div class="checkbox">
+                                                                                    <?php if($shoppConf['values']):
+                                                                                          $arr_values = explode(',',$shoppConf['values']);
+                                                                                          $arr_value = explode(',',$shoppConf['value']);
+                                                                                          foreach($arr_values as $k1 => $v1):
+                                                                                    ?>
+                                                                                        <label>
+                                                                                            &nbsp;&nbsp;<input value="<?php echo $v1; ?>" class="colored-blue" <?php if(in_array($v1,$arr_value)){echo 'checked="checked"';} ?>  name="<?php echo $shoppConf['conf_ename'] ;?>[]" type="checkbox">
+                                                                                            <span class="text"><?php echo $v1; ?></span>
+                                                                                        </label>
+                                                                                    <?php endforeach; endif;?>
+                                                                                </div>
+                                                                            <?php elseif($shoppConf['form_stype'] == 'file') : ?>
+                                                                            <!--文件上传-->
+                                                                                <input style="float:left;margin-left: 10px" name="<?php echo $shoppConf['conf_ename'] ;?>" type="file">
+                                                                                <?php if($shoppConf['value']): ?>
+                                                                                    <img style="width: 30px;height: 30px" src="__IMG__/conf/{$shoppConf['value']}" />
+                                                                                <?php else: ?>
+                                                                                    <span style="color: red">暂无缩略图</span>
+                                                                                <?php endif;?>
+                                                                            <?php elseif($shoppConf['form_stype'] == 'select') : ?>
+                                                                            <!--下拉菜单-->
+                                                                                <select name="<?php echo $shoppConf['conf_ename'] ;?>" style="margin-left: 15px">
+                                                                                     <option value="">请选择</option>
+                                                                                    <?php if($shoppConf['values']):
+                                                                                          $arr = explode(',',$shoppConf['values']);
+                                                                                          foreach($arr as $k1 => $v1):
+                                                                                    ?>
+                                                                                        <option <?php if($shoppConf['value'] == $v1){echo 'selected="selected"';} ?> value="<?php echo $v1; ?> "><?php echo $v1; ?> </option>
+                                                                                    <?php endforeach; endif;?>
+                                                                                </select>
+                                                                            <?php endif ?>
+                                                                        </div>
+
+                                                                    </div>
+                                                                <?php endforeach;?>
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-offset-2 col-sm-10">
+                                                                        <button type="submit" class="btn btn-default" style="margin-top: 10px">保存信息</button>
+                                                                    </div>
+                                                                </div>
+
+                                                        </div>
+
+                                                        <div id="profile11" class="tab-pane">
+                                                            <div class="form-horizontal" >
+                                                                <?php foreach( $GoodsConfRes as $k =>$goodsConf ) :?>
+                                                                <div class="form-group">
+                                                                    <label for="username" class="col-sm-2 control-label no-padding-right"><?php echo $goodsConf['conf_cname'] ?></label>
+                                                                    <div class="col-sm-6">
+                                                                        <?php if($goodsConf['form_stype'] == 'input') :?>
+                                                                        <!--单行文本-->
+                                                                        <input value="{$goodsConf['value']}" class="form-control"  placeholder="" name="<?php echo $goodsConf['conf_ename'] ;?>"  type="text">
+                                                                        <?php elseif($goodsConf['form_stype'] == 'textarea') : ?>
+                                                                        <!--文本域-->
+                                                                        <textarea name="<?php echo $goodsConf['conf_ename'] ;?>" style="width: 600px;height: 80px;margin-left: 15px">{$goodsConf['value']}</textarea>
+                                                                        <?php elseif($goodsConf['form_stype'] == 'redio') : ?>
+                                                                        <!--单选-->
+                                                                        <div class="col-sm-6">
+                                                                            <?php if($goodsConf['values']):
+                                                                                          $arr = explode(',',$goodsConf['values']);
+                                                                                          foreach($arr as $k1 => $v1):
+                                                                            ?>
+                                                                            <div class="radio" style="float: left;">
+                                                                                <label>
+                                                                                    &nbsp;&nbsp;&nbsp;<input <?php if($goodsConf['value'] == $v1){echo 'checked="checked"';} ?> value="<?php echo $v1; ?>" name="<?php echo $goodsConf['conf_ename'] ;?>" type="radio">
+                                                                                    <span class="text"><?php echo $v1; ?> </span>
+                                                                                </label>
+                                                                            </div>
+                                                                            <?php endforeach; endif;?>
+
+                                                                        </div>
+                                                                        <?php elseif($goodsConf['form_stype'] == 'checkbox') : ?>
+                                                                        <!--复选-->
+                                                                        <div class="checkbox">
+                                                                            <?php if($goodsConf['values']):
+                                                                                          $arr_values = explode(',',$goodsConf['values']);
+                                                                                          $arr_value = explode(',',$goodsConf['value']);
+                                                                                          foreach($arr_values as $k1 => $v1):
+                                                                            ?>
+                                                                            <label>
+                                                                                &nbsp;&nbsp;<input value="<?php echo $v1; ?>" class="colored-blue" <?php if(in_array($v1,$arr_value)){echo 'checked="checked"';} ?>  name="<?php echo $goodsConf['conf_ename'] ;?>[]" type="checkbox">
+                                                                                <span class="text"><?php echo $v1; ?></span>
+                                                                            </label>
+                                                                            <?php endforeach; endif;?>
+                                                                        </div>
+                                                                        <?php elseif($goodsConf['form_stype'] == 'file') : ?>
+                                                                        <!--文件上传-->
+                                                                        <input style="float:left;margin-left: 10px" name="<?php echo $goodsConf['conf_ename'] ;?>" type="file">
+                                                                        <?php if($goodsConf['value']): ?>
+                                                                        <img style="width: 30px;height: 30px" src="__IMG__/conf/{$goodsConf['value']}" />
+                                                                        <?php else: ?>
+                                                                        <span style="color: red">暂无缩略图</span>
+                                                                        <?php endif;?>
+                                                                        <?php elseif($shoppConf['form_stype'] == 'select') : ?>
+                                                                        <!--下拉菜单-->
+                                                                        <select name="<?php echo $goodsConf['conf_ename'] ;?>" style="margin-left: 15px">
+                                                                            <option value="">请选择</option>
+                                                                            <?php if($goodsConf['values']):
+                                                                                          $arr = explode(',',$goodsConf['values']);
+                                                                                          foreach($arr as $k1 => $v1):
+                                                                            ?>
+                                                                            <option <?php if($goodsConf['value'] == $v1){echo 'selected="selected"';} ?> value="<?php echo $v1; ?> "><?php echo $v1; ?> </option>
+                                                                            <?php endforeach; endif;?>
+                                                                        </select>
+                                                                        <?php endif ?>
+                                                                    </div>
+
+                                                                </div>
+                                                                <?php endforeach;?>
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-offset-2 col-sm-10">
+                                                                        <button type="submit" class="btn btn-default" style="margin-top: 10px">保存信息</button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /Page Body -->
+        </div>
+        <!-- /Page Content -->
+    </div>
+</div>
+
+<!--Basic Scripts-->
+<script src="__ADMIN__/style/jquery_002.js"></script>
+<script src="__ADMIN__/style/bootstrap.js"></script>
+<script src="__ADMIN__/style/jquery.js"></script>
+<!--Beyond Scripts-->
+<script src="__ADMIN__/style/beyond.js"></script>
+
+
+
+</body></html>

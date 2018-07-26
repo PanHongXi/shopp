@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="utf-8">
+    <title>商品添加</title>
+
+    <meta name="description" content="Dashboard">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--Basic Styles-->
+    <link href="__ADMIN__/style/bootstrap.css" rel="stylesheet">
+    <link href="__ADMIN__/style/font-awesome.css" rel="stylesheet">
+    <link href="__ADMIN__/style/weather-icons.css" rel="stylesheet">
+
+    <!--Beyond styles-->
+    <link id="beyond-link" href="__ADMIN__/style/beyond.css" rel="stylesheet" type="text/css">
+    <link href="__ADMIN__/style/demo.css" rel="stylesheet">
+    <link href="__ADMIN__/style/typicons.css" rel="stylesheet">
+    <link href="__ADMIN__/style/animate.css" rel="stylesheet">
+    <style>
+        .price{
+            width: 150px;
+            display: inline-block;
+        }
+    </style>
+
+</head>
+<body>
+<!-- 头部 -->
+{include file="Common/header"}
+
+<!-- /头部 -->
+
+<div class="main-container container-fluid">
+    <div class="page-container">
+        <!-- Page Sidebar -->
+        {include file="Common/left"}
+        <!-- /Page Sidebar -->
+        <!-- Page Content -->
+        <div class="page-content">
+            <!-- Page Breadcrumb -->
+            <div class="page-breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="#">商品管理</a>
+                    </li>
+                    <li>
+                        <a href="{:url('goodsList')}">商品管理</a>
+                    </li>
+                    <li class="active">添加商品</li>
+                </ul>
+            </div>
+            <!-- /Page Breadcrumb -->
+
+            <!-- Page Body -->
+            <div class="page-body">
+
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12 col-xs-12">
+                        <div class="widget">
+                            <div class="widget-header bordered-bottom bordered-blue">
+                                <span class="widget-caption">新增商品/&nbsp;&nbsp;<a href="{:url('goodsList')}">返回商品列表</a></span>
+                            </div>
+                            <div class="widget-body">
+                                <div id="horizontal-form">
+                                    <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+                                        <div class="widget-body">
+                                            <div class="widget-main ">
+                                                <div class="tabbable">
+                                                    <ul class="nav nav-tabs tabs-flat" id="myTab11">
+                                                        <li class="active">
+                                                            <a data-toggle="tab" href="#baseinfo">
+                                                                商品基本信息
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a data-toggle="tab" href="#goodsdesc">
+                                                                描述信息
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a data-toggle="tab" href="#mbprice">
+                                                                会员价格
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a data-toggle="tab" href="#goodsattr">
+                                                                商品属性
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a data-toggle="tab" href="#goodsphoto">
+                                                                商品相册
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="tab-content tabs-flat">
+                                                        <!--商品基本信息-->
+                                                        <div id="baseinfo" class="tab-pane in active">
+                                                            <div class="form-group">
+                                                                <label for="username" class="col-sm-2 control-label no-padding-right">商品名称</label>
+                                                                <div class="col-sm-6">
+                                                                    <input class="form-control" id="goods_name" placeholder="请输入商品名称" name="goods_name" required="" type="text">
+                                                                </div>
+                                                                <p class="help-block col-sm-4 red">* 必填</p>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="username" class="col-sm-2 control-label no-padding-right">商品主图</label>
+                                                                <div class="col-sm-6">
+                                                                    <input class="" style="margin-top: 1%"  name="og_thumb"  type="file">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="username" class="col-sm-2 control-label no-padding-right">上架</label>
+                                                                <div class="col-sm-6">
+                                                                    <div class="radio" style="float: left">
+                                                                        <label>
+                                                                            <input value="1" name="on_sale" checked="checked" type="radio" >
+                                                                            <span class="text">是 </span>
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="radio" style="float: left;margin-left: 20px">
+                                                                        <label>
+                                                                            <input value="0" name="on_sale" type="radio" class="inverted">
+                                                                            <span class="text">否</span>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="username" class="col-sm-2 control-label no-padding-right">推荐位置</label>
+                                                                <div class="col-sm-6">
+                                                                    <div class="radio" style="float: left">
+                                                                        {volist name="recomRes" id="recomRes"}
+                                                                            <label style="margin-left: 15px">
+                                                                                <input value="{$recomRes['rec_id']}" name="recpos[]" type="checkbox" >
+                                                                                <span class="text">{$recomRes['rec_name']} </span>
+                                                                            </label>
+                                                                        {/volist}
+
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="username" class="col-sm-2 control-label no-padding-right">所属分类</label>
+                                                                <div class="col-sm-6">
+                                                                    <select name="goodsclass_id">
+                                                                        <option value="">请选择</option>
+                                                                        {volist name="GoodsclassRes" id="GoodsclassRes"}
+                                                                        <option value="{$GoodsclassRes['id']}"><?php echo str_repeat('- ',$GoodsclassRes['level'] * 2); ?>{$GoodsclassRes['class_name']}</option>
+                                                                        {/volist}
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="username" class="col-sm-2 control-label no-padding-right">所属品牌</label>
+                                                                <div class="col-sm-6">
+                                                                    <select name="brand_id">
+                                                                        <option value="">请选择</option>
+                                                                        {volist name="brandRes" id="brandRes"}
+                                                                        <option value="{$brandRes['brand_id']}">{$brandRes['brand_name']}</option>
+                                                                        {/volist}
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="username" class="col-sm-2 control-label no-padding-right">市场价</label>
+                                                                <div class="col-sm-6">
+                                                                    <input class="form-control" id="markte_price" placeholder="请输入市场价格" name="markte_price" required="" type="text">
+                                                                </div>
+                                                                <p class="help-block col-sm-4 red">* 必填</p>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="username" class="col-sm-2 control-label no-padding-right">本店价</label>
+                                                                <div class="col-sm-6">
+                                                                    <input class="form-control" id="shop_price" placeholder="请输入本店价" name="shop_price" required="" type="text">
+                                                                </div>
+                                                                <p class="help-block col-sm-4 red">* 必填</p>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="username" class="col-sm-2 control-label no-padding-right">重量</label>
+                                                                <div class="col-sm-6">
+                                                                    <input class="form-control"  style="width: 300px;display: inline" placeholder="请输入商品重量" name="goods_weight" required="" type="text">
+                                                                    <select name="weight_unit">
+                                                                        <option value="kg">kg</option>
+                                                                        <option value="g">g</option>
+                                                                    </select>
+                                                                </div>
+                                                                <p class="help-block col-sm-4 red">* 必填</p>
+                                                            </div>
+
+                                                        </div>
+                                                        <!--描述信息-->
+                                                        <div id="goodsdesc" class="tab-pane">
+                                                            <div class="form-group">
+                                                                <label for="username" class="col-sm-2 control-label no-padding-right">描述信息</label>
+                                                                <div class="col-sm-6"  >
+                                                                    <textarea  id="content" name="goods_desc" ></textarea>
+                                                                </div>
+                                                                <p class="help-block col-sm-4 red">* 必填</p>
+                                                            </div>
+                                                        </div>
+                                                        <!--会员价格-->
+                                                        <div id="mbprice" class="tab-pane">
+                                                            {volist name="member_level" id="vo"}
+                                                            <div class="form-group">
+                                                                <label for="username" class="col-sm-2 control-label no-padding-right">{$vo['level_name']}</label>
+                                                                <div class="col-sm-6">
+                                                                    <input class="form-control" placeholder="请输入本店{$vo['level_name']}价" name="mp[{$vo.level_id}]" type="text">
+                                                                </div>
+                                                            </div>
+                                                            {/volist}
+                                                        </div>
+                                                        <!--商品属性-->
+                                                        <div id="goodsattr" class="tab-pane">
+                                                            <div class="form-group">
+                                                                <label for="username" class="col-sm-2 control-label no-padding-right">商品类型</label>
+                                                                <div class="col-sm-6">
+                                                                    <select name="goodstype_id">
+                                                                        <option value="">请选择</option>
+                                                                        {volist name="goodsType" id="goodsType"}
+                                                                        <option value="{$goodsType['id']}">{$goodsType['type_name']}</option>
+                                                                        {/volist}
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div id="attr_list"></div>
+                                                        </div>
+                                                        <!--商品相册-->
+                                                        <div id="goodsphoto" class="tab-pane">
+                                                            <div class="form-group">
+                                                                <label for="username" class="col-sm-2 control-label no-padding-right">商品相册</label>
+                                                                <div class="col-sm-6"></div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="username" class="col-sm-2 control-label no-padding-right">商品图片</label>
+                                                                <div class="col-sm-6">
+                                                                    <a href="#" onclick="addphoto(this)">[+]</a>
+                                                                    <input class="" style="margin-top: 1%;width: 50%;display: inline-block"  name="goods_photos[]"  type="file">
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-top: 2%">
+                                            <div class="col-sm-offset-2 col-sm-10">
+                                                <button type="submit" class="btn btn-default">保存信息</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /Page Body -->
+        </div>
+        <!-- /Page Content -->
+    </div>
+</div>
+
+<!--Basic Scripts-->
+<script src="__ADMIN__/style/jquery_002.js"></script>
+<script src="__ADMIN__/style/bootstrap.js"></script>
+<script src="__ADMIN__/style/jquery.js"></script>
+<!--Beyond Scripts-->
+<script src="__ADMIN__/style/beyond.js"></script>
+
+<script src="__UED__/ueditor.config.js"></script>
+<script src="__UED__/ueditor.all.min.js"></script>
+<script src="__UED__/lang/zh-cn/zh-cn.js"></script>
+
+</body></html>
+<script type="text/javascript">
+    //实例化编辑器
+    //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+    UE.getEditor('content',{initialFrameWidth:700,initialFrameHeight:400});
+    //    toolbars: [['bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript',
+    //        'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc','fullscreen','source','undo','redo']]
+
+</script>
+<script>
+    $("select[name=goodstype_id]").change(function () {
+        var type_id = $(this).val();
+        $.ajax({
+            type:"POST",
+            url:"{:url('Goodsattr/ajaxAttr')}",
+            data:{type_id:type_id},
+            dataType:"json",
+            success:function (data) {
+                var html = "";
+                $(data).each(function (k,v) {
+                    if (v.attr_type == 1){
+                        html += "<div class='form-group'>";
+                        html += "<label for='username' class='col-sm-2 control-label no-padding-right'>"+v.attr_name+"</label>";
+                        html += "<div class='col-sm-6'>";
+                        html += "<a style='margin-right: 10px' onclick='addrow(this)' href='#'>[+]</a>";
+                        var attrValuesAttr = v.atrr_values.split(",");
+                        html += "<select name='goods_attr["+v.id+"][]'>";
+                        html += "<option value=''>请选择</option>";
+                        for (var i= 0;i<attrValuesAttr.length;i++){
+                            html += "<option value='"+attrValuesAttr[i]+"'>"+attrValuesAttr[i]+"</option>";
+                        }
+                        html += "</select>";
+                        html += "<input type='text' name='attr_price[]' style='margin-left: 20px' class='form-control price' placeholder='请输入价格' />";
+                        html += "</div>";
+                        html += "</div>";
+                    }else{
+                        if (v.atrr_values) {
+                            html += "<div class='form-group'>";
+                            html += "<label for='username' class='col-sm-2 control-label no-padding-right'>"+v.attr_name+"</label>";
+                            html += "<div class='col-sm-6'>";
+                            var attrValuesAttr = v.atrr_values.split(",");
+                            html += "<select name='goods_attr["+v.id+"]'>";
+                            html += "<option value=''>请选择</option>";
+                            for (var i= 0;i<attrValuesAttr.length;i++){
+                                html += "<option value='"+attrValuesAttr[i]+"'>"+attrValuesAttr[i]+"</option>";
+                            }
+                            html += "</select>";
+                            html += "</div>";
+                            html += "</div>";
+                        }else {
+                            html += "<div class='form-group'>";
+                            html += "<label for='username' class='col-sm-2 control-label no-padding-right'>"+v.attr_name+"</label>";
+                            html += "<div class='col-sm-6'>";
+                            var attrValuesAttr = v.atrr_values.split(",");
+                            html += "<input type='text' name='goods_attr["+v.id+"]' style='margin-left: 20px' class='form-control price' placeholder='请输入"+v.attr_name+"' />";
+                            html += "</div>";
+                            html += "</div>";
+                        }
+
+                    }
+                });
+                $("#attr_list").html(html);
+            }
+        });
+    });
+
+    function addrow(o) {
+        var div = $(o).parent().parent();
+        if ($(o).html() == '[+]') {
+            var newdiv = div.clone();
+            newdiv.find('a').html('[-]');
+            div.after(newdiv);
+        }else {
+            div.remove();
+        }
+    }
+    //添加商品相册
+    function addphoto(e) {
+        var div = $(e).parent().parent();
+        if ($(e).html() == '[+]') {
+            var newdiv = div.clone();
+            newdiv.find('a').html('[-]');
+            div.after(newdiv);
+        }else {
+            div.remove();
+        }
+    }
+</script>

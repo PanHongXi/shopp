@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="utf-8">
+    <title>潘琰SHOPP</title>
+
+    <meta name="description" content="Dashboard">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--Basic Styles-->
+    <link href="__ADMIN__/style/bootstrap.css" rel="stylesheet">
+    <link href="__ADMIN__/style/font-awesome.css" rel="stylesheet">
+    <link href="__ADMIN__/style/weather-icons.css" rel="stylesheet">
+
+    <!--Beyond styles-->
+    <link id="beyond-link" href="__ADMIN__/style/beyond.css" rel="stylesheet" type="text/css">
+    <link href="__ADMIN__/style/demo.css" rel="stylesheet">
+    <link href="__ADMIN__/style/typicons.css" rel="stylesheet">
+    <link href="__ADMIN__/style/animate.css" rel="stylesheet">
+
+</head>
+<body>
+<!-- 头部 -->
+{include file="Common/header"}
+<!-- /头部 -->
+<div class="main-container container-fluid">
+    <div class="page-container">
+        <!-- Page Sidebar -->
+        {include file="Common/left"}
+        <!-- /Page Sidebar -->
+        <!-- Page Content -->
+        <div class="page-content">
+            <!-- Page Breadcrumb -->
+            <div class="page-breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="#">文章模块</a>
+                    </li>
+                    <li>
+                        <a href="{:url('goodsList')}">文章分类</a>
+                    </li>
+                    <li class="active">添加分类</li>
+                </ul>
+            </div>
+            <!-- /Page Breadcrumb -->
+            <!-- Page Body -->
+            <div class="page-body">
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12 col-xs-12">
+                        <div class="widget">
+                            <div class="widget-header bordered-bottom bordered-blue">
+                                <span class="widget-caption">新增分类/&nbsp;&nbsp;<a href="{:url('GoodsList')}">返回分类列表</a></span>
+                            </div>
+                            <div class="widget-body">
+                                <div id="horizontal-form">
+                                    <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+                                            <input name="id" type="hidden" value="{$GoodsclassEdit['id']}" />
+                                        <div class="form-group">
+                                            <label for="username" class="col-sm-2 control-label no-padding-right">上级分类</label>
+                                            <div class="col-sm-6">
+                                                <select class="form-control" id="pid"  name="pid" required="" >
+                                                    <option value="0">顶级分类</option>
+                                                    {volist name="GoodsclassRes" id="GoodsclassRes"}
+                                                        <option {if condition="$GoodsclassEdit['pid'] eq  $GoodsclassRes['id']"} selected="selected" {/if} value="{$GoodsclassRes['id']}"><?php echo str_repeat('- ',$GoodsclassRes['level'] * 2); ?>{$GoodsclassRes['class_name']}</option>
+                                                    {/volist}
+                                                </select>
+                                            </div>
+                                            <p class="help-block col-sm-4 red">* 必填</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="username" class="col-sm-2 control-label no-padding-right">分类名称</label>
+                                            <div class="col-sm-6">
+                                                <input class="form-control" id="class_name" value="{$GoodsclassEdit['class_name']}" placeholder="请输入分类名称" name="class_name" required="" type="text">
+                                            </div>
+                                            <p class="help-block col-sm-4 red">* 必填</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="username" class="col-sm-2 control-label no-padding-right">分类关键词</label>
+                                            <div class="col-sm-6">
+                                                <input class="form-control" value="{$GoodsclassEdit['keywords']}"  id="keywords" placeholder="请输入分类关键词" name="keywords" required="" type="text">
+                                            </div>
+                                            <p class="help-block col-sm-4 red">* 必填</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="username" class="col-sm-2 control-label no-padding-right">icon图标</label>
+                                            <div class="col-sm-6">
+                                                <input class="form-control" id="iconfont" value="{$GoodsclassEdit['iconfont']}" placeholder="请输入icon图标" name="iconfont" required="" type="text">
+                                            </div>
+                                            <p class="help-block col-sm-4 red">* 必填</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="username" class="col-sm-2 control-label no-padding-right">显示导航</label>
+                                            <div class="col-sm-6">
+                                                <div class="radio" style="float: left">
+                                                    <label>
+                                                        <input {if condition="$GoodsclassEdit['show_nav'] eq 1"}checked="checked"{/if} value="1" name="show_nav" type="radio" >
+                                                        <span class="text">显示 </span>
+                                                    </label>
+                                                </div>
+                                                <div class="radio" style="float: left;margin-left: 20px">
+                                                    <label>
+                                                        <input {if condition="$GoodsclassEdit['show_nav'] eq 0"}checked="checked"{/if}  value="0" name="show_nav" type="radio"  class="inverted">
+                                                        <span class="text">隐藏</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="username" class="col-sm-2 control-label no-padding-right">推荐位置</label>
+                                            <div class="col-sm-6">
+                                                <div class="radio" style="float: left">
+                                                    {volist name="recomRes" id="recomRes"}
+                                                        <?php if(in_array($recomRes['rec_id'], $goodsClass_rec_item)) {
+                                                                $checked = 'checked="checked"';
+                                                            } else {
+                                                                $checked = '';
+                                                            }
+                                                        ?>
+                                                        <label style="margin-left: 15px">
+                                                            <input <?php echo $checked;?> value="{$recomRes['rec_id']}" name="recpos[]" type="checkbox" >
+                                                            <span class="text">{$recomRes['rec_name']} </span>
+                                                        </label>
+                                                    {/volist}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="username" class="col-sm-2 control-label no-padding-right">商品图片</label>
+                                            <input name="thumb"  type="file"/>
+                                            {if condition="$GoodsclassEdit['thumb'] eq null"}
+                                            <span style="color: red">暂无图片</span>
+                                            {else /}
+                                            <img style="width: 50px;height: 50px;margin-top: 10px;margin-left: 30px" src="__IMG__/{$GoodsclassEdit['thumb']}">
+                                            {/if}
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="username" class="col-sm-2 control-label no-padding-right">分类描述</label>
+                                            <div class="col-sm-6">
+                                                <textarea style="height: 300px" class="form-control" id="description" placeholder="请输入分类的描述，最多不能超过300个字符......" name="description" required="" >{$GoodsclassEdit['description']}</textarea>
+                                            </div>
+                                            <p class="help-block col-sm-4 red">* 必填</p>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-2 col-sm-10">
+                                                <button type="submit" class="btn btn-default">保存信息</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /Page Body -->
+        </div>
+        <!-- /Page Content -->
+    </div>
+</div>
+
+<!--Basic Scripts-->
+<script src="__ADMIN__/style/jquery_002.js"></script>
+<script src="__ADMIN__/style/bootstrap.js"></script>
+<script src="__ADMIN__/style/jquery.js"></script>
+<!--Beyond Scripts-->
+<script src="__ADMIN__/style/beyond.js"></script>
+
+
+
+</body></html>

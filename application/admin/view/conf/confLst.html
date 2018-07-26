@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="utf-8">
+    <title>潘琰SHOPP</title>
+
+    <meta name="description" content="Dashboard">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--Basic Styles-->
+    <link href="__ADMIN__/style/bootstrap.css" rel="stylesheet">
+    <link href="__ADMIN__/style/font-awesome.css" rel="stylesheet">
+    <link href="__ADMIN__/style/weather-icons.css" rel="stylesheet">
+
+    <!--Beyond styles-->
+    <link id="beyond-link" href="__ADMIN__/style/beyond.css" rel="stylesheet" type="text/css">
+    <link href="__ADMIN__/style/demo.css" rel="stylesheet">
+    <link href="__ADMIN__/style/typicons.css" rel="stylesheet">
+    <link href="__ADMIN__/style/animate.css" rel="stylesheet">
+
+</head>
+<body>
+<!-- 头部 -->
+{include file="Common/header"}
+
+<!-- /头部 -->
+
+<div class="main-container container-fluid">
+    <div class="page-container">
+        <!-- Page Sidebar -->
+        {include file="Common/left"}
+        <!-- /Page Sidebar -->
+        <!-- Page Content -->
+        <div class="page-content">
+            <!-- Page Breadcrumb -->
+            <div class="page-breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="#">配置管理</a>
+                    </li>
+                    <li class="active">配置管理</li>
+                </ul>
+            </div>
+            <!-- /Page Breadcrumb -->
+
+            <!-- Page Body -->
+            <div class="page-body">
+
+                <button type="button" tooltip="添加配置" class="btn btn-sm btn-azure btn-addon" onClick="javascript:window.location.href = '{:url('Conf/confAdd')}'"> <i class="fa fa-plus"></i> Add
+                </button>
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12 col-xs-12">
+                        <div class="widget">
+                            <div class="widget-body">
+                                <div class="flip-scroll">
+                                    <form action="" method="post">
+                                    <table class="table table-bordered table-hover">
+                                        <thead class="">
+                                        <tr>
+                                            <th style="width: 5%" class="text-center">配置ID</th>
+                                            <th class="text-center">中文名称</th>
+                                            <th style="width: 17%" class="text-center">英文名称</th>
+                                            <th style="width: 6%" class="text-center">表单类型</th>
+                                            <th style="width: 8%" class="text-center">配置类型</th>
+                                            <th class="text-center">可选值</th>
+                                            <th style="width: 10%" class="text-center">默认值</th>
+                                            <th style="width: 2%" class="text-center">排序</th>
+                                            <th style="width: 20%" class="text-center">操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        {volist name="confRes" id="confRes"}
+                                        <tr>
+                                            <td align="center">{$confRes['conf_id']}</td>
+                                            <td align="center">{$confRes['conf_cname']}</td>
+                                            <td align="center">{$confRes['conf_ename']} </td>
+                                            <td align="center">{$confRes['form_stype']}</td>
+                                            <td align="center">
+                                                {if condition="$confRes['conf_stype'] eq 1"}网站配置
+                                                {else/}商品配置
+                                                {/if}
+                                            </td>
+                                            <td align="center">{$confRes['values'] = str_replace(',','，',$confRes['values'])}</td>
+                                            <td align="center">{$confRes['value']}</td>
+                                            <td align="center">
+                                                <input style="width: 50px;text-align: center" name="sort[{$confRes['conf_id']}]" value="{$confRes['sort']}" />
+                                            </td>
+                                            <td align="center">
+                                                <a href="{:url('preview',array('conf_id'=>$confRes['conf_id']))}" class="btn btn-primary btn-sm shiny">
+                                                    <i class="fa fa-edit"></i> 预览
+                                                </a>
+                                                <a href="{:url('confEdit',array('conf_id'=>$confRes['conf_id']))}" class="btn btn-primary btn-sm shiny">
+                                                    <i class="fa fa-edit"></i> 编辑
+                                                </a>
+                                                <a href="#" onClick="warning('确实要删除吗', '{:url('confDel',array('conf_id'=>$confRes['conf_id']))}')" class="btn btn-danger btn-sm shiny">
+                                                    <i class="fa fa-trash-o"></i> 删除
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        {/volist}
+                                        <tr>
+                                            <td colspan="9" align="right" style="padding-right: 21%">
+                                                <input type="submit" value="提交" class="btn btn-primary btn-sm shiny" />
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    </form>
+                                </div>
+                                <div style="margin-top: 20px;margin-left: 40%;">
+                                    {$page}
+
+                                </div>
+                                <div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /Page Body -->
+        </div>
+        <!-- /Page Content -->
+    </div>
+</div>
+
+<!--Basic Scripts-->
+<script src="__ADMIN__/style/jquery_002.js"></script>
+<script src="__ADMIN__/style/bootstrap.js"></script>
+<script src="__ADMIN__/style/jquery.js"></script>
+<!--Beyond Scripts-->
+<script src="__ADMIN__/style/beyond.js"></script>
+
+
+
+</body></html>
